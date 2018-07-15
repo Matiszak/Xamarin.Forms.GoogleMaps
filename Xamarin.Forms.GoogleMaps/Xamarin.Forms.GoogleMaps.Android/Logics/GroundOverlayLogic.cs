@@ -7,6 +7,7 @@ using Android.Gms.Maps.Model;
 using Xamarin.Forms.GoogleMaps.Android.Extensions;
 using Xamarin.Forms.GoogleMaps.Android;
 using System.Linq;
+using Xamarin.Forms.GoogleMaps.Android.Factories;
 
 namespace Xamarin.Forms.GoogleMaps.Logics.Android
 {
@@ -36,11 +37,13 @@ namespace Xamarin.Forms.GoogleMaps.Logics.Android
 
         protected override NativeGroundOverlay CreateNativeItem(GroundOverlay outerItem)
         {
+            var nativeDescriptor = NativeBitmapDescriptorFactory.Instance.ToNativeDescriptor(outerItem.Icon);
+
             var opts = new GroundOverlayOptions()
                 .PositionFromBounds(outerItem.Bounds.ToLatLngBounds())
                 .Clickable(outerItem.IsClickable)
                 .InvokeBearing(outerItem.Bearing)
-                .InvokeImage(outerItem.Icon.ToBitmapDescriptor())
+                .InvokeImage(nativeDescriptor)
                 .InvokeTransparency(outerItem.Transparency)
                 .InvokeZIndex(outerItem.ZIndex);
 
@@ -88,7 +91,8 @@ namespace Xamarin.Forms.GoogleMaps.Logics.Android
 
         internal override void OnUpdateIcon(GroundOverlay outerItem, NativeGroundOverlay nativeItem)
         {
-            nativeItem.SetImage(outerItem.Icon.ToBitmapDescriptor());
+            var nativeDescriptor = NativeBitmapDescriptorFactory.Instance.ToNativeDescriptor(outerItem.Icon);
+            nativeItem.SetImage(nativeDescriptor);
         }
 
         internal override void OnUpdateIsClickable(GroundOverlay outerItem, NativeGroundOverlay nativeItem)

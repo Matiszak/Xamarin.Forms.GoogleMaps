@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms.GoogleMaps.Android.Factories;
 
 namespace XFGoogleMapSample.Droid
 {
@@ -22,6 +23,7 @@ namespace XFGoogleMapSample.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.FormsGoogleMaps.Init(this, bundle); // initialize for Xamarin.Forms.GoogleMaps
+            NativeBitmapDescriptorFactory.SetFactory(new CachingNativeBitmapDescriptorFactory()); //enable caching by replacing default factory
             LoadApplication(new App());
         }
     }

@@ -5,24 +5,24 @@ namespace Xamarin.Forms.GoogleMaps
 {
     public static class BitmapDescriptorFactory
     {
-        public static BitmapDescriptor DefaultMarker(Color color)
+        public static BitmapDescriptor DefaultMarker(Color color, int? id = null)
         {
-            return BitmapDescriptor.DefaultMarker(color);
+            return BitmapDescriptor.DefaultMarker(color, id ?? color.GetHashCode());
         }
 
-        public static BitmapDescriptor FromBundle(string bundleName)
+        public static BitmapDescriptor FromBundle(string bundleName, int? id = null)
         {
-            return BitmapDescriptor.FromBundle(bundleName);
+            return BitmapDescriptor.FromBundle(bundleName, id ?? bundleName.GetHashCode());
         }
 
-        public static BitmapDescriptor FromStream(Stream stream)
+        public static BitmapDescriptor FromStream(Stream stream, int? id = null)
         {
-            return BitmapDescriptor.FromStream(stream);
+            return BitmapDescriptor.FromStream(stream, id);
         }
 
-        public static BitmapDescriptor FromView(View view)
+        public static BitmapDescriptor FromView(View view, int? id = null)
         {
-            return BitmapDescriptor.FromView(view);
+            return BitmapDescriptor.FromView(view, id ?? view.Id.GetHashCode());
         }
 
         //public static BitmapDescriptor FromPath(string absolutePath)

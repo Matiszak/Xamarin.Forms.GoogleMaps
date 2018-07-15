@@ -5,10 +5,10 @@ using System.Linq;
 using System.ComponentModel;
 using Xamarin.Forms.GoogleMaps.Android;
 using Xamarin.Forms.GoogleMaps.Android.Extensions;
-using NativeBitmapDescriptorFactory = Android.Gms.Maps.Model.BitmapDescriptorFactory;
 using Android.Widget;
 using System;
 using Android.Content;
+using Xamarin.Forms.GoogleMaps.Android.Factories;
 
 namespace Xamarin.Forms.GoogleMaps.Logics.Android
 {
@@ -88,7 +88,8 @@ namespace Xamarin.Forms.GoogleMaps.Logics.Android
 
             if (outerItem.Icon != null)
             {
-                opts.SetIcon(outerItem.Icon.ToBitmapDescriptor());
+                var nativeDescriptor = NativeBitmapDescriptorFactory.Instance.ToNativeDescriptor(outerItem.Icon);
+                opts.SetIcon(nativeDescriptor);
             }
 
             _onMarkerCreating(outerItem, opts);
@@ -303,7 +304,8 @@ namespace Xamarin.Forms.GoogleMaps.Logics.Android
             }
             else
             {
-                nativeItem.SetIcon(outerItem.Icon?.ToBitmapDescriptor() ?? NativeBitmapDescriptorFactory.DefaultMarker());
+                var nativeDescriptor = NativeBitmapDescriptorFactory.Instance.ToNativeDescriptorOrDefault(outerItem.Icon);
+                nativeItem.SetIcon(nativeDescriptor);
                 nativeItem.SetAnchor(0.5f, 1f);
                 nativeItem.SetInfoWindowAnchor(0.5f, 0f);
             }
